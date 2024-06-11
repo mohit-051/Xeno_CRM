@@ -12,8 +12,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+// Replace 'your_mongodb_uri' with your actual MongoDB URI
+const mongoURI = 'mongodb+srv://meesala050:iWl3W6aTlTVatKgb@cluster0.z1pnfen.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/crm_db', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Failed to connect to MongoDB', err));
 
 // Data ingestion API
 app.post('/api/customers', async (req, res) => {
